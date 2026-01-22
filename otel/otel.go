@@ -57,7 +57,7 @@ func doInitialize() {
 			propagation.Baggage{},
 		))
 
-	http.DefaultClient = otelhttp.DefaultClient
+	http.DefaultClient = &http.Client{Transport: otelhttp.NewTransport(http.DefaultTransport)}
 }
 
 func newResource(ctx context.Context) *resource.Resource {
